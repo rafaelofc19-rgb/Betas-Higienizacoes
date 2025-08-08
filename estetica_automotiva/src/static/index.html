@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estética Automotiva - Sistema de Gestão</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-car"></i>
+                    <h2>Estética Automotiva</h2>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="menu-item" data-section="estoque">
+                    <i class="fas fa-boxes"></i>
+                    <span>Controle de Estoque</span>
+                </li>
+                <li class="menu-item" data-section="servicos">
+                    <i class="fas fa-tools"></i>
+                    <span>Serviços e Preços</span>
+                </li>
+                <li class="menu-item" data-section="agendamentos">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Agendamentos</span>
+                </li>
+                <li class="menu-item" data-section="clientes">
+                    <i class="fas fa-users"></i>
+                    <span>Clientes</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h1 id="page-title">Dashboard</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="add-btn">
+                        <i class="fas fa-plus"></i>
+                        <span>Adicionar</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Produtos em Estoque</h3>
+                            <p class="card-number" id="total-produtos">0</p>
+                            <span class="card-subtitle">Total de produtos</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Estoque Baixo</h3>
+                            <p class="card-number" id="estoque-baixo">0</p>
+                            <span class="card-subtitle">Produtos com estoque baixo</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Agendamentos Hoje</h3>
+                            <p class="card-number" id="agendamentos-hoje">0</p>
+                            <span class="card-subtitle">Serviços agendados</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total de Clientes</h3>
+                            <p class="card-number" id="total-clientes">0</p>
+                            <span class="card-subtitle">Clientes cadastrados</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-charts">
+                    <div class="chart-container">
+                        <h3>Próximos Agendamentos</h3>
+                        <div id="proximos-agendamentos" class="agendamentos-list">
+                            <!-- Agendamentos serão carregados aqui -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Estoque Section -->
+            <section id="estoque-section" class="content-section">
+                <div class="section-header">
+                    <div class="search-container">
+                        <input type="text" id="search-produtos" placeholder="Buscar produtos...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-container">
+                        <select id="filter-categoria">
+                            <option value="">Todas as categorias</option>
+                            <option value="Ceras">Ceras</option>
+                            <option value="Shampoos">Shampoos</option>
+                            <option value="Panos">Panos</option>
+                            <option value="Acessórios">Acessórios</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="produtos-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Estoque</th>
+                                <th>Preço Custo</th>
+                                <th>Preço Venda</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Produtos serão carregados aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Serviços Section -->
+            <section id="servicos-section" class="content-section">
+                <div class="section-header">
+                    <div class="search-container">
+                        <input type="text" id="search-servicos" placeholder="Buscar serviços...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="servicos-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Tempo (min)</th>
+                                <th>Custo M.O.</th>
+                                <th>Custo Mat.</th>
+                                <th>Margem (%)</th>
+                                <th>Preço Final</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Serviços serão carregados aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Agendamentos Section -->
+            <section id="agendamentos-section" class="content-section">
+                <div class="section-header">
+                    <div class="date-filter">
+                        <input type="date" id="filter-data" value="">
+                    </div>
+                    <div class="status-filter">
+                        <select id="filter-status">
+                            <option value="">Todos os status</option>
+                            <option value="agendado">Agendado</option>
+                            <option value="confirmado">Confirmado</option>
+                            <option value="em_andamento">Em Andamento</option>
+                            <option value="concluido">Concluído</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="agendamentos-table">
+                        <thead>
+                            <tr>
+                                <th>Data/Hora</th>
+                                <th>Cliente</th>
+                                <th>Serviço</th>
+                                <th>Status</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Agendamentos serão carregados aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Clientes Section -->
+            <section id="clientes-section" class="content-section">
+                <div class="section-header">
+                    <div class="search-container">
+                        <input type="text" id="search-clientes" placeholder="Buscar clientes...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="clientes-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>Email</th>
+                                <th>Data Cadastro</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Clientes serão carregados aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal para formulários -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Título do Modal</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form">
+                    <!-- Conteúdo do formulário será inserido aqui -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancel-btn">Cancelar</button>
+                <button type="submit" form="modal-form" class="btn btn-primary" id="save-btn">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loading" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
