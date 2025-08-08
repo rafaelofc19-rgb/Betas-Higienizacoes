@@ -90,10 +90,6 @@ estetica_automotiva/
    ```
 5. Acesse http://localhost:5001
 
-## URL de Produção
-
-A aplicação está disponível em: https://y0h0i3cmlqdv.manus.space
-
 ## Características da Interface
 
 - **Design Responsivo**: Funciona em desktop e dispositivos móveis
